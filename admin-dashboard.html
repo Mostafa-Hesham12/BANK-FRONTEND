@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .employee-list, .customer-list {
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Admin Dashboard</h1>
+        
+        <!-- Account Management Section -->
+        <div class="grid-container">
+            <div class="card">
+                <h2>Account Balance Check</h2>
+                <div class="form-group">
+                    <input type="number" id="accountId" placeholder="Enter Account ID">
+                </div>
+                <button onclick="getAccountBalance()">Get Balance</button>
+                <div id="balanceResult"></div>
+            </div>
+
+            <div class="card">
+                <h2>Account Statement</h2>
+                <div class="form-group">
+                    <input type="number" id="statementAccountId" placeholder="Enter Account ID">
+                </div>
+                <button onclick="getAccountStatement()">Get Statement</button>
+                <div id="statementResult"></div>
+            </div>
+        </div>
+
+        <!-- Loan Management -->
+        <div class="card">
+            <h2>Create New Loan</h2>
+            <div class="form-group">
+                <input type="number" id="loanAccountId" placeholder="Account ID">
+            </div>
+            <div class="form-group">
+                <select id="loanType">
+                    <option value="1">Personal Loan</option>
+                    <option value="2">Business Loan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="number" id="loanAmount" placeholder="Paid Amount">
+            </div>
+            <div class="form-group">
+                <input type="date" id="dueDate">
+            </div>
+            <button onclick="createLoan()">Create Loan</button>
+        </div>
+
+        <!-- Employee Management -->
+        <div class="card">
+            <h2>Create Employees</h2>
+            <div class="form-group">
+                <input type="text" id="empFirstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <input type="text" id="empLastName" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <input type="email" id="empEmail" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" id="empPassword" placeholder="Password">
+            </div>
+            <button onclick="createEmployee()">Create Employee</button>
+            
+            <div class="card">
+                <h3>Employees List</h3>
+                <table id="employeesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Hire Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Customer Management -->
+        <div class="card">
+            <h2>Create Customers</h2>
+            <div class="form-group">
+                <input type="text" id="custFirstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <input type="text" id="custLastName" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <input type="email" id="custEmail" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" id="custPassword" placeholder="Password">
+            </div>
+            <button onclick="createCustomer()">Create Customer</button>
+            
+            <div class="card">
+                <h3>Customers List</h3>
+                <table id="customersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Join Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

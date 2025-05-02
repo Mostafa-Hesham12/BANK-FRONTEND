@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Funds</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .transfer-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .transfer-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .transfer-header h1 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .transfer-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #34495e;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #f1c40f, #f39c12);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="transfer-container">
+        <div class="transfer-header">
+            <h1>Transfer Funds</h1>
+            <p>Securely transfer money between accounts</p>
+        </div>
+        
+        <form id="transferForm" class="transfer-form">
+            <div class="form-group">
+                <label for="recipient">Recipient Account Number</label>
+                <input 
+                    type="text" 
+                    id="recipient" 
+                    required
+                    placeholder="Enter account number"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount (USD)</label>
+                <input 
+                    type="number" 
+                    id="amount" 
+                    step="0.01" 
+                    min="0.01" 
+                    required
+                    placeholder="Enter transfer amount"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reference">Reference (Optional)</label>
+                <input 
+                    type="text" 
+                    id="reference" 
+                    placeholder="Transaction reference"
+                >
+            </div>
+
+            <button type="submit" class="submit-btn">Transfer Now</button>
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+        </form>
+    </div>
+
+    <script src="transfer.js"></script>
+</body>
+</html>
