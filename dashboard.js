@@ -1,6 +1,5 @@
 const API_BASE = 'https://bank-backend-production.up.railway.app';
 
-// Enhanced debug logging
 console.log('[DEBUG] Dashboard script loaded');
 console.log('[DEBUG] Initial token:', localStorage.getItem('banking_token'));
 
@@ -44,7 +43,6 @@ async function loadBalance() {
             document.getElementById('cardStatus').textContent = data.card_status;
             document.getElementById('welcomeHeader').textContent = `Welcome, ${data.customer_name}`;
             
-            // تحديث حالة الزر
             const blockBtn = document.getElementById('blockBtn');
             blockBtn.textContent = data.card_status === 'Blocked' ? 'Unblock' : 'Block';
             blockBtn.className = `block-btn ${data.card_status === 'Blocked' ? 'unblock' : 'block'}`;
@@ -56,7 +54,6 @@ async function loadBalance() {
 
 async function toggleBlockStatus() {
     try {
-        // جلب الحالة الحالية
         const currentStatus = document.getElementById('cardStatus').textContent === 'Blocked';
         
         const response = await fetch(`${API_BASE}/cards/toggle-block`, {
@@ -66,7 +63,7 @@ async function toggleBlockStatus() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                is_blocked: !currentStatus // إرسال الحالة المعاكسة
+                is_blocked: !currentStatus 
             })
         });
 
@@ -75,7 +72,6 @@ async function toggleBlockStatus() {
             throw new Error(errorData.detail);
         }
 
-        // تحديث الواجهة بدون إعادة تحميل
         const newStatus = !currentStatus ? 'Blocked' : 'Active';
         document.getElementById('cardStatus').textContent = newStatus;
         document.getElementById('blockBtn').textContent = newStatus === 'Blocked' ? 'Unblock' : 'Block';
@@ -93,16 +89,12 @@ async function loadTransactions() {
       
 
         data.transactions.forEach(t => {
-            // Handle date parsing and formatting
             let dateString;
             try {
-                // Use the correct field name from response
                 const rawDate = t.date; 
                 
-                // Create Date object (handle timezone)
                 const transactionDate = new Date(rawDate);
                 
-                // Format options for Arabic (Egypt)
                 const options = {
                     year: 'numeric',
                     month: 'short',
@@ -115,7 +107,6 @@ async function loadTransactions() {
 
                 dateString = transactionDate.toLocaleString('ar-EG', options);
                 
-                // Handle future dates from test data
                 
                 
             } catch (e) {
@@ -123,11 +114,9 @@ async function loadTransactions() {
                 dateString = 'Date Not Available';
             }
 
-            // Transaction details
             const isDeposit = t.type === 'deposit';
             const amount = parseFloat(t.amount).toFixed(2);
             
-            // Create HTML element
             const transactionEl = document.createElement('div');
             transactionEl.className = 'transaction-item';
             transactionEl.innerHTML = `
@@ -151,7 +140,6 @@ async function loadTransactions() {
     }
 }
 
-// Initialize dashboard
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('[DEBUG] DOM fully loaded and parsed');
     
@@ -170,7 +158,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Navigation controls
 function loadDeposit() { window.location.href = 'deposit.html'; }
 function loadWithdraw() { window.location.href = 'withdraw.html'; }
 function loadTransfer() { window.location.href = 'transfer.html'; }
