@@ -1,7 +1,6 @@
 const API_BASE = 'https://bank-backend-production.up.railway.app';
 let authToken = localStorage.getItem('banking_token');
 
-// ====================== General Helper Functions ======================
 async function handleResponse(response) {
     if (!response.ok) {
         const errorData = await response.json();
@@ -10,7 +9,6 @@ async function handleResponse(response) {
     return response.json();
 }
 
-// ====================== Account Management ======================
 async function getAccountBalance() {
     try {
         const accountId = document.getElementById('accountId').value;
@@ -54,7 +52,6 @@ async function getAccountStatement() {
     }
 }
 
-// ====================== Loan Management ======================
 async function createLoan() {
     try {
         const loanData = {
@@ -94,7 +91,6 @@ async function deleteCustomer(customerId) {
     }
 }
 
-// ====================== Create Operations ======================
 async function createCustomer() {
     try {
         const customerData = {
@@ -126,7 +122,6 @@ async function createCustomer() {
 
 
 
-// ====================== Data Loading & Rendering ======================
 async function loadCustomers() {
     try {
         const response = await fetch(`${API_BASE}/customers`, {
@@ -155,7 +150,6 @@ async function loadCustomers() {
 
 
 
-// ====================== Initialization ======================
 document.addEventListener('DOMContentLoaded', () => {
     if (!authToken) window.location.href = 'employee.html';
     loadCustomers();
